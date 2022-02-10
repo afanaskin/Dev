@@ -10,11 +10,11 @@ services:
         target: /home/git/target/WebApp.war
 
   web:
-    build: Deploy
+    image: 9.0.58-jre8-openjdk-slim
     volumes:
       - type: volume
         source: app
-        target: /opt/tomcat/webapps/
+        target: /usr/local/tomcat/webapps/WebApp.war
     ports:
       - "8081:8080"
     depends_on:
