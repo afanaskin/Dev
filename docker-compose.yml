@@ -1,5 +1,5 @@
 ---
-version: "3.8"
+version: "3"
 services:
 
   mvn:
@@ -20,4 +20,3 @@ services:
       - mvn
 volumes:
   app
----
