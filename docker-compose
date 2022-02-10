@@ -1,0 +1,23 @@
+---
+version: "3.8"
+services:
+
+  mvn:
+    build: Build
+    volumes:
+      - type: volume
+        source: app
+        target: /home/git/target/WebApp.war
+
+  web:
+    build: Deploy
+    volumes:
+      - type: volume
+        source: app
+        target: /opt/tomcat/webapps/
+    ports: "8080:8080"
+    depends_on:
+      - mvn
+volumes:
+  app
+___
