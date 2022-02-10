@@ -20,4 +20,4 @@ services:
       - mvn
 volumes:
   app
-___
+---
