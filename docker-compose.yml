@@ -7,12 +7,12 @@ services:
     volumes:
       - type: volume
         source: app
-        target: /home/git/target/WebApp.war
+        target: /home/git/target/
 
   web:
-    image: 9.0.58-jre8-openjdk-slim
+    image: tomcat:9.0.58-jre8-openjdk-slim
     volumes:
-      - type: volume
+      - type: bind
         source: app
         target: /usr/local/tomcat/webapps/WebApp.war
     ports:
