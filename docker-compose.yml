@@ -10,9 +10,9 @@ services:
         target: /home/war
 
   web:
-    image: jre8-alpine
+    image: tomcat:alpine
     volumes:
-      - type: bind
+      - type: volume
         source: app
         target: /usr/local/tomcat/webapps
     ports:
