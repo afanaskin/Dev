@@ -6,4 +6,5 @@ maven \
 && rm -rf /var/lib/apt/lists/* \
 WORKDIR /home/git
 RUN git clone https://github.com/deepshankaryadav/CyberFRAT-DevSecOps-Training-Sample-Java-App.git /home/git
-CMD ["mvn","package"]
+WORKDIR /home/war
+RUN mv /home/git/target/*.war /home/war

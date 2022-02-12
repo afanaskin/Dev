@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: "3.7"
 services:
 
   mvn:
@@ -7,14 +7,14 @@ services:
     volumes:
       - type: volume
         source: app
-        target: /home/git/target/
+        target: /home/war
 
   web:
-    image: tomcat:9.0.58-jre8-openjdk-slim
+    image: jre8-alpine
     volumes:
       - type: bind
         source: app
-        target: /usr/local/tomcat/webapps/WebApp.war
+        target: /usr/local/tomcat/webapps
     ports:
       - "8081:8080"
     depends_on:
