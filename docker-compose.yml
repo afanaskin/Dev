@@ -5,19 +5,15 @@ services:
   mvn:
     build: Build
     volumes:
-      - type: volume
-        source: app
-        target: /home/war
+      - Hello:/home/war
 
   web:
     image: tomcat:alpine
     volumes:
-      - type: volume
-        source: app
-        target: /usr/local/tomcat/webapps
+      - Hello:/usr/local/tomcat/webapps
     ports:
       - "8081:8080"
     depends_on:
       - mvn
 volumes:
-  app:
+  Hello:
