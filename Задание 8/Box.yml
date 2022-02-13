@@ -1,5 +1,5 @@
 ---
-- name: default-jdk
+- name: Install default-jdk
   hosts: all
   become: yes
 
@@ -26,10 +26,14 @@
           - git
           - maven
 
+    - name: Directory preparation
+      command: mkdir -m777 /tmp/git
+      become: yes
+
     - name: Ensure app was downloaded
       git:
         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-        dest: /tmp
+        dest: /tmp/git
         clone: yes
         update: yes
         force: yes
@@ -38,7 +42,7 @@
       command: mvn package
       become: yes
       args:
-        chdir: /tmp/boxfuse-sample-java-war-hello
+        chdir: /tmp/git/boxfuse-sample-java-war-hello
 
 - name: Run application
   hosts: tomcat
