@@ -27,13 +27,16 @@
           - maven
 
     - name: Directory preparation
-      command: mkdir -m777 /tmp/git
+      file:
+        path: /home/git
+        state: directory
+        mode: '0777'
       become: yes
 
     - name: Ensure app was downloaded
       git:
         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-        dest: /tmp/git
+        dest: /home/git
         clone: yes
         update: yes
         force: yes
@@ -42,7 +45,7 @@
       command: mvn package
       become: yes
       args:
-        chdir: /tmp/git/boxfuse-sample-java-war-hello
+        chdir: /home/git/
 
 - name: Run application
   hosts: tomcat
@@ -60,7 +63,7 @@
         state: started
 
     - name: Copy app from remote host
-      command: scp root@35.228.230.199:/tmp/boxfuse-sample-java-war-hello/target/hello*.war /var/lib/tomcat9/webapps
+      command: scp root@35.228.230.199:/home/git/target/hello*.war /var/lib/tomcat9/webapps
       become: yes
 
     - name: Application deploing
