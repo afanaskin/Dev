@@ -8,6 +8,7 @@
       apt:
         name: "*"
         state: latest
+        force_apt_get: yes
 
     - name: Install app
       apt:
@@ -31,11 +32,12 @@
         dest: /tmp
         clone: yes
         update: yes
+        force: yes
 
     - name: Ensure app was building
       command: mvn package
       become: yes
-      arg:
+      args:
         chdir: /tmp/boxfuse-sample-java-war-hello
 
 - name: Run application
