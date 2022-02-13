@@ -1,5 +1,5 @@
 ---
-- name: install java
+- name: default-jdk
   hosts: all
   become: yes
 
@@ -9,7 +9,7 @@
         name: "*"
         state: latest
 
-  - name: Install app
+    - name: Install app
       apt:
         name: default-jdk
         state: present
