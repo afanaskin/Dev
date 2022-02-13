@@ -25,7 +25,6 @@
           - git
           - maven
 
-  task:
     - name: Ensure app was downloaded
       git:
         repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
@@ -33,7 +32,6 @@
         clone: yes
         update: yes
 
-  task:
     - name: Ensure app was building
       command: mvn package
       become: yes
@@ -55,12 +53,10 @@
         name: tomcat9
         state: started
 
-  task:
     - name: Copy app from remote host
       command: scp root@35.228.230.199:/tmp/boxfuse-sample-java-war-hello/target/hello*.war /var/lib/tomcat9/webapps
       become: yes
 
-  task:
     - name: Application deploing
       command: service tomcat9 restart
       become: yes
