@@ -1,0 +1,66 @@
+---
+- name: install java
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest
+
+  - name: Install app
+      apt:
+        name: default-jdk
+        state: present
+
+- name: Application building
+  hosts: build
+  become: yes
+
+  tasks:
+    - name: Install git & maven
+      apt:
+        pkg:
+          - git
+          - maven
+
+  task:
+    - name: Ensure app was downloaded
+      git:
+        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+        dest: /tmp
+        clone: yes
+        update: yes
+
+  task:
+    - name: Ensure app was building
+      command: mvn package
+      become: yes
+      arg:
+        chdir: /tmp/boxfuse-sample-java-war-hello
+
+- name: Run application
+  hosts: tomcat
+  become: yes
+
+  tasks:
+    - name: Install Tomcat 9
+      apt:
+        name: tomcat9
+        state: present
+
+    - name: Ensure Tomcat 9 service is started
+      service:
+        name: tomcat9
+        state: started
+
+  task:
+    - name: Copy app from remote host
+      command: scp root@35.228.230.199:/tmp/boxfuse-sample-java-war-hello/target/hello*.war /var/lib/tomcat9/webapps
+      become: yes
+
+  task:
+    - name: Application deploing
+      command: service tomcat9 restart
+      become: yes
