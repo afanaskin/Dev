@@ -73,7 +73,6 @@
       delegate_to: 34.88.177.55 #машина на которую копируем
 
     - name: Application deploing
-      #command: service tomcat9 restart
       service:
         name: tomcat9
         state: restarted
