@@ -64,8 +64,7 @@
 
     - name: Copy app from remote host
       synchronize:
-        №mode: pull #В этом режиме синхронизируем данные с src на путь dest машины из delegate_to
-        src: /home/git/target/hello*.war #путь на машине с которой копируем
+        src: /home/git/target/hello-1.0.war #путь на машине с которой копируем
         dest: /var/lib/tomcat9/webapps #путь на машине на которую копируем
       delegate_to: 34.88.177.55 #машина на которую копируем
 
