@@ -23,4 +23,3 @@
       command: mvn package
       args:
         chdir: {{ download_folder }}
----

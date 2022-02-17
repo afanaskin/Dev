@@ -16,4 +16,3 @@
       delegate_to: {{ delegate_ip }}
   notify:
     - restart tomcat
----

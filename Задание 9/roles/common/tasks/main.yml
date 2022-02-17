@@ -4,4 +4,3 @@
   with_items:
     - "*"
     - default-jdk
----

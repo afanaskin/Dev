@@ -2,4 +2,3 @@
 source_folder: /home/git/target
 dest_folder: /var/lib/tomcat9
 delegate_ip: 51.250.27.203
----
