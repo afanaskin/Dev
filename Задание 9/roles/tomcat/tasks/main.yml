@@ -5,14 +5,14 @@
     - tomcat9
 
 - name: Ensure Tomcat 9 service is started
-      service:
-        name: tomcat9
-        state: started
+  service:
+    name: tomcat9
+    state: started
 
 - name: Copy app from remote host
-      synchronize:
-        src: {{ source_folder }}/hello-1.0.war
-        dest: {{ dest_folder }}/webapps
-      delegate_to: {{ delegate_ip }}
+  synchronize:
+    src: {{ source_folder }}/hello-1.0.war
+    dest: {{ dest_folder }}/webapps
+  delegate_to: {{ delegate_ip }}
   notify:
     - restart tomcat
