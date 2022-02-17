@@ -7,11 +7,11 @@
     - common
     - build
 
- - name: tomcat configuration
-   hosts: tomcat
-   become: yes
+- name: tomcat configuration
+  hosts: tomcat
+  become: yes
 
-   roles:
-     - common
-     - tomcat
+  roles:
+    - common
+    - tomcat
 ---
