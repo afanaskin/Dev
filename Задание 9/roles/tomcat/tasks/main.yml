@@ -11,8 +11,8 @@
 
 - name: Copy app from remote host
   synchronize:
-    src: {{ source_folder }}/hello-1.0.war
-    dest: {{ dest_folder }}/webapps
-  delegate_to: {{ delegate_ip }}
+    src: "{{ source_folder }}/hello-1.0.war"
+    dest: "{{ dest_folder }}/webapps"
+  delegate_to: "{{ delegate_ip }}"
   notify:
     - restart tomcat
