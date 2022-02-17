@@ -1,0 +1,26 @@
+---
+- name: Install git & maven
+  apt: name={{ item }} state=present
+  with_items:
+    - git
+    - maven
+
+- name: Directory preparation
+      file:
+        path: {{ download_folder }}
+        state: directory
+        mode: '0777'
+
+- name: Ensure app was downloaded
+      git:
+        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+        dest: {{ download_folder }}
+        clone: yes
+        update: yes
+        force: yes
+
+- name: Ensure app was building
+      command: mvn package
+      args:
+        chdir: {{ download_folder }}
+---
