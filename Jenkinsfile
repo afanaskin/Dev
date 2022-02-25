@@ -1,16 +1,14 @@
 pipeline {
   agent {
     docker {
-      image '10.129.0.7:8123/builder:1.0'
+      image '10.129.0.18:5000/builder:1.0'
     }
   }
 
   stages {
     stage ('Copy source') {
       steps {
-        /*mkdir /home/git
-        cd /home/git*/
-        git 'https://github.com/deepshankaryadav/CyberFRAT-DevSecOps-Training-Sample-Java-App.git'
+        git 'https://github.com/afanaskin/hello.git'
       }
     }
 
