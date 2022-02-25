@@ -14,7 +14,7 @@ pipeline {
 
     stage ('Build war') {
       steps {
-        mvn package
+        sh 'mvn package'
       }
     }
 
