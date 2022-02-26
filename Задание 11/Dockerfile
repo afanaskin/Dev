@@ -4,7 +4,7 @@ FROM openjdk:8u242-stretch
 RUN apt-get update && apt-get install -y git
 
 #Install maven
-WORKDIR /opt/maven
+#WORKDIR /opt/maven
 RUN wget http://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz && \
     tar zxvf apache-maven-*.tar.gz -C /opt/ && \
     ln -s /opt/apache-maven-3.8.4 /opt/maven && \
