@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image '10.129.0.18:5000/builder:1.2'
+      image '10.129.0.18:5000/builder:1.4'
     }
   }
 
