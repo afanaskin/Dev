@@ -37,6 +37,7 @@ pipeline {
                 cd /home/afanaskin/run
 	            docker-compose up -d
             '''
+        }
       }
     }
 
