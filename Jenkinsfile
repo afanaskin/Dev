@@ -28,6 +28,7 @@ pipeline {
 
     stage ('Run App') {
       steps {
+        sh 'ssh-keyscan -H 10.129.0.18 >> ~/.ssh/known_hosts'
         sh '''ssh root@10.129.0.30 docker pull 10.129.0.18:5000/webapp:1.1
 	cd /home/afanaskin/run
 	docker-compose up -d'''
