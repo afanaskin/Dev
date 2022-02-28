@@ -28,7 +28,7 @@ pipeline {
 
     stage ('Run App') {
       steps {
-        sshagent(credentials: ['ssh-credentials-id']) {
+        sshagent(credentials: ['d0a9ce25-a50a-4f96-8bff-09be9e801421']) {
             sh '''
                 [ -d ~/.ssh ] || mkdir ~/.ssh && chmod 0700 ~/.ssh
                 ssh-keyscan -t rsa,dsa 10.129.0.30 >> ~/.ssh/known_hosts
