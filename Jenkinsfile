@@ -22,8 +22,8 @@ pipeline {
     stage ('Make docker image') {
       steps {
         sh 'cp /var/lib/jenkins/workspace/pipe_1/target/*.war .'
-        sh 'docker build -t app:1.1 .'
-        sh '''docker tag app:1.1 10.129.0.18:5000/app:1.1 && docker push 10.129.0.18:5000/app:1.1'''
+        sh 'docker build -t app:1.2 .'
+        sh '''docker tag app:1.2 10.129.0.18:5000/app:1.2 && docker push 10.129.0.18:5000/app:1.2'''
       }
     }
 
