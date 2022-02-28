@@ -28,6 +28,7 @@ pipeline {
 
     stage ('Run App') {
       steps {
+       sh 'ssh root@10.129.0.30'
        sh 'docker pull 10.129.0.18:5000/webapp:1.1'
        sh 'cd /home/afanaskin/run'
        sh 'docker-compose up -d'
