@@ -3,6 +3,10 @@ FROM openjdk:8u242-stretch
 #Install packages
 RUN apt-get update && apt-get install -y git
 
+# Confugure ssh client
+COPY id_rsa /root/.ssh/id_rsa
+RUN chmod 600 /root/.ssh/id_rsa
+
 #Install maven
 RUN wget http://dlcdn.apache.org/maven/maven-3/3.8.4/binaries/apache-maven-3.8.4-bin.tar.gz && \
     tar zxvf apache-maven-*.tar.gz -C /opt/ && \
