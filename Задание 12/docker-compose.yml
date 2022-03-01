@@ -21,10 +21,9 @@ services:
       MYSQL_PASSWORD: myuserpassword
 
   web:
-    image: tomcat:alpine
+    build: Run
     volumes:
       - share:/usr/local/tomcat/webapps
-      - ./app:/usr/local/tomcat/ROOT/
     ports:
       - "8081:8080"
     depends_on:
