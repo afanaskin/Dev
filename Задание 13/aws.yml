@@ -10,7 +10,8 @@
 
   tasks:
     - name: Make build instance
-      amazon.aws.ec2: image={{ image }}
+      amazon.aws.ec2:
+        image={{ image }}
         instance_type={{ instance_type }}
         instance_tags='{ "Name":"Build" }'
         region={{ region }}
@@ -18,7 +19,8 @@
         wait=yes
 
     - name: Make run instance
-      amazon.aws.ec2: image={{ image }}
+      amazon.aws.ec2:
+        image={{ image }}
         instance_type={{ instance_type }}
         instance_tags='{ "Name":"Run" }'
         region={{ region }}
