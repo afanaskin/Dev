@@ -2,27 +2,12 @@
 - name: Instanses provisioning
   hosts: localhost
   gather_facts: False
-  vars:
-    instance_type: "t3.micro"
-    image: "ami-0c74592590298c864"
-    group: "provisioning"
-    region: "eu-north-1"
 
   tasks:
     - name: Make build instance
-      amazon.aws.ec2:
-        image={{ image }}
-        instance_type={{ instance_type }}
-        instance_tags='{ "Name":"Build" }'
-        region={{ region }}
-        group={{ group }}
-        wait=yes
-
-    - name: Make run instance
-      amazon.aws.ec2:
-        image={{ image }}
-        instance_type={{ instance_type }}
-        instance_tags='{ "Name":"Run" }'
-        region={{ region }}
-        group={{ group }}
-        wait=yes
+      ec2_instance:
+        name: "Build"
+        key_name: "MyKeyPair"
+        instance_type: t3.micro
+        image_id: ami-0c74592590298c864
+        region: eu-north-1
