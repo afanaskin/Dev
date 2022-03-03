@@ -19,7 +19,7 @@
 
     - name: Add build instance to host group
       add_host: hostname={{ item.public_ip }} groups=build
-      loop: "{{ myregistry.instances }}"
+      loop: "{{ myregistry.instances.network_interfaces }}"
 
 - name: Install default-jdk
   hosts: build
