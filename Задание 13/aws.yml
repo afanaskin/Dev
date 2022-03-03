@@ -13,10 +13,10 @@
         image_id: ami-092cce4a19b438926
         region: eu-north-1\
         state: present
-        instance_tags:
+        tags:
           Name: Build
           type: web
-          env: prod
+          env: test
 
     - name: Make run instance
       ec2_instance:
@@ -26,10 +26,10 @@
         image_id: ami-092cce4a19b438926
         region: eu-north-1
         state: present
-        instance_tags:
+        tags:
           Name: Run
           type: web
-          env: prod
+          env: test
 
 - name: Install default-jdk
   hosts: web:&prod
