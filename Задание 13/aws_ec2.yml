@@ -21,7 +21,7 @@
         region: "{{ region }}"
         assign_public_ip: yes
       register: ec2
-      - name: Add build instance to host group
+    - name: Add build instance to host group
         add_host:
           hostname: "{{ item.public_ip }}"
           groupname: build
@@ -37,11 +37,11 @@
           region: "{{ region }}"
           assign_public_ip: yes
         register: ec2
-        - name: Add build instance to host group
-          add_host:
-            hostname: "{{ item.public_ip }}"
-            groupname: run
-          loop: "{{ ec2.instances }}"
+    - name: Add build instance to host group
+        add_host:
+          hostname: "{{ item.public_ip }}"
+          groupname: run
+        loop: "{{ ec2.instances }}"
 
 - name: Install default-jdk
   hosts: build, run
