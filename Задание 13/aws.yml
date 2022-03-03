@@ -19,17 +19,17 @@
           env: prod
 
     - name: Make build instance
-        ec2_instance:
-          name: "Run"
-          key_name: "MyKeyPair"
-          instance_type: "t3.micro"
-          image_id: ami-092cce4a19b438926
-          region: eu-north-1
-          state: present
-          instance_tags:
-            Name: Run
-            type: web
-            env: prod
+      ec2_instance:
+        name: "Run"
+        key_name: "MyKeyPair"
+        instance_type: "t3.micro"
+        image_id: ami-092cce4a19b438926
+        region: eu-north-1
+        state: present
+        instance_tags:
+          Name: Run
+          type: web
+          env: prod
 
 - name: Install default-jdk
   hosts: web:&prod
