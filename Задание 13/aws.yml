@@ -12,11 +12,10 @@
         instance_type: "t3.micro"
         image_id: ami-092cce4a19b438926
         region: eu-north-1
+        placement_group: "build"
+        network:
+          assign_public_ip: true
         state: present
-        tags:
-          Name: Build
-          type: web
-          env: test
 
     - name: Make run instance
       ec2_instance:
@@ -25,14 +24,13 @@
         instance_type: "t3.micro"
         image_id: ami-092cce4a19b438926
         region: eu-north-1
+        placement_group: "run"
+        network:
+          assign_public_ip: true
         state: present
-        tags:
-          Name: Run
-          type: web
-          env: test
 
 - name: Install default-jdk
-  hosts: web:&prod
+  hosts: build, run
   become: yes
 
   tasks:
