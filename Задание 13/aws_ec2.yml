@@ -1,0 +1,60 @@
+---
+- name: Instanses provisioning
+  hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    keypair: MyKeyPair
+    instance_type: t3.micro
+    security_group: MySecurityGroup325
+    image: ami-092cce4a19b438926
+    region: eu-north-1
+
+  tasks:
+    - name: Make build instance
+      ec2:
+        key_name: "{{ keypair }}"
+        group: "{{ security_group }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        assign_public_ip: yes
+      register: ec2
+      - name: Add build instance to host group
+        add_host:
+          hostname: "{{ item.public_ip }}"
+          groupname: build
+        loop: "{{ ec2.instances }}"
+
+    - name: Make run instance
+        ec2:
+          key_name: "{{ keypair }}"
+          group: "{{ security_group }}"
+          instance_type: "{{ instance_type }}"
+          image: "{{ image }}"
+          wait: true
+          region: "{{ region }}"
+          assign_public_ip: yes
+        register: ec2
+        - name: Add build instance to host group
+          add_host:
+            hostname: "{{ item.public_ip }}"
+            groupname: run
+          loop: "{{ ec2.instances }}"
+
+- name: Install default-jdk
+  hosts: build, run
+  become: yes
+
+  tasks:
+    - name: Upgrade all packages to the latest version
+      apt:
+        name: "*"
+        state: latest
+        force_apt_get: yes
+
+    - name: Install app
+      apt:
+        name: default-jdk
+        state: present
