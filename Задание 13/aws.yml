@@ -15,14 +15,11 @@
           assign_public_ip: true
         image_id: ami-092cce4a19b438926
         region: eu-north-1
-      register: ec2
-    - name: Var
-      debug:
-        var: ec2.instances[0].public_ip
+      register: myregistry
 
     - name: Add build instance to host group
-      add_host: hostname={{ ec2.instances[0].public_ip }} groups=build
-      #loop: "{{ ec2.instances }}"
+      add_host: hostname={{ item.public_ip }} groups=build
+      loop: "{{ myregistry.instances }}"
 
 - name: Install default-jdk
   hosts: build
