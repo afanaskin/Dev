@@ -18,7 +18,7 @@
           type: web
           env: prod
 
-    - name: Make build instance
+    - name: Make run instance
       ec2_instance:
         name: "Run"
         key_name: "MyKeyPair"
