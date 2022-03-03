@@ -11,17 +11,15 @@
         name: "Run"
         key_name: "MyKeyPair03"
         instance_type: "t3.micro"
+        security_group: MySecurityGroup326
+        network:
+          assign_public_ip: true
         image_id: ami-092cce4a19b438926
         region: eu-north-1
-        network:
-          assign_public_ip: yes
-        state: present
       register: ec2
 
     - name: Add build instance to host group
-      add_host:
-        name: "{{ item.public_ip }}"
-        groups: build
+      add_host: hostname={{ item.public_ip }} groups=build
       loop: "{{ ec2.instances }}"
 
 - name: Install default-jdk
