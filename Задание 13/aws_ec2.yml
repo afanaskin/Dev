@@ -22,26 +22,26 @@
         assign_public_ip: yes
       register: ec2
     - name: Add build instance to host group
-        add_host:
-          hostname: "{{ item.public_ip }}"
-          groupname: build
-        loop: "{{ ec2.instances }}"
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: build
+      loop: "{{ ec2.instances }}"
 
     - name: Make run instance
-        ec2:
-          key_name: "{{ keypair }}"
-          group: "{{ security_group }}"
-          instance_type: "{{ instance_type }}"
-          image: "{{ image }}"
-          wait: true
-          region: "{{ region }}"
-          assign_public_ip: yes
-        register: ec2
+      ec2:
+        key_name: "{{ keypair }}"
+        group: "{{ security_group }}"
+        instance_type: "{{ instance_type }}"
+        image: "{{ image }}"
+        wait: true
+        region: "{{ region }}"
+        assign_public_ip: yes
+      register: ec2
     - name: Add build instance to host group
-        add_host:
-          hostname: "{{ item.public_ip }}"
-          groupname: run
-        loop: "{{ ec2.instances }}"
+      add_host:
+        hostname: "{{ item.public_ip }}"
+        groupname: run
+      loop: "{{ ec2.instances }}"
 
 - name: Install default-jdk
   hosts: build, run
