@@ -19,13 +19,14 @@
 
     - name: Add build instance to host group
       add_host: hostname={{ item.public_ip_address }} groups=build
+      ansible_private_key_file: ~/.ssh/MyKeyPair03.pem
       loop: "{{ myregistry.instances }}"
 
 - name: Install default-jdk
   hosts: build
   remote_user: ubuntu
-    become_user: root
-    become: true
+  become_user: root
+  become: true
 
   tasks:
     - name: Upgrade all packages to the latest version
