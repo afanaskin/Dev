@@ -60,15 +60,15 @@
   become: true
 
   tasks:
-
-    apt: name={{item}} state=present
-    with_items:
-      - "*"
-      - default-jdk
-      - python3
-      - python3-pip
-      - boto3
-      - botocore
+    - name: Update and install system
+      apt: name={{item}} state=present
+      with_items:
+        - "*"
+        - default-jdk
+        - python3
+        - python3-pip
+        - boto3
+        - botocore
     #- name: Update system
       #apt: update_cache=yes
 
