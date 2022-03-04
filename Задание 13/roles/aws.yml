@@ -1,0 +1,24 @@
+---
+- name: Instanses provisioning
+  hosts: localhost
+  gather_facts: False
+  roles:
+    - create
+
+- name: Application building
+  hosts: build
+  remote_user: ubuntu
+  become_user: root
+  become: true
+  roles:
+    - common
+    - build
+
+- name: Run application
+  hosts: run
+  remote_user: ubuntu
+  become_user: root
+  become: true
+  roles:
+    - common
+    - tomcat

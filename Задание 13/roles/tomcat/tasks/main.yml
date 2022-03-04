@@ -1,0 +1,21 @@
+---
+- name: Install Tomcat 9
+  apt: name={{ item }} state=present
+  with_items:
+    - tomcat9
+
+- name: Ensure Tomcat 9 service is started
+  service:
+    name: tomcat9
+    state: started
+
+- name: GET war file
+  aws_s3:
+    aws_access_key: "{{ access_key }}"
+    aws_secret_key: "{{ secret_key }}"
+    bucket: mybacket30.test4.com
+    object: hello-1.0.war
+    dest: /var/lib/tomcat9/webapps/hello-1.0.war
+    mode: get
+  notify:
+    - restart tomcat

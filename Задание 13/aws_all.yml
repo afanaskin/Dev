@@ -113,6 +113,8 @@
 
     - name: PUT war file
       aws_s3:
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
         bucket: mybacket30.test4.com
         object: hello-1.0.war
         src: /home/git/target/hello-1.0.war
@@ -137,6 +139,8 @@
 
     - name: GET war file
       aws_s3:
+        aws_access_key: "{{ access_key }}"
+        aws_secret_key: "{{ secret_key }}"
         bucket: mybacket30.test4.com
         object: hello-1.0.war
         dest: /var/lib/tomcat9/webapps/hello-1.0.war
