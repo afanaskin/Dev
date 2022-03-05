@@ -2,9 +2,13 @@
 - name: Create a security group in AWS
   ec2_group:
     name: default
-    description: allow 22 port
+    description: allow 22,8080 ports
     region: eu-north-1
     rules:
+      - proto: tcp
+        from_port: 22
+        to_port: 22
+        cidr_ip: 0.0.0.0/0
       - proto: tcp
         from_port: 22
         to_port: 22
