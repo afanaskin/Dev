@@ -1,0 +1,4 @@
+Создать файл с паролем к ansible-vault
+Утилитой ansible-vault зашифровать значения переменных access_key и secret_key. Зашифрованное значение подставить в значение переменных в /roles/build/defaults/main.yml и /roles/tomcat/defaults/main.yml
+Пример команды: ansible-vault encrypt_string --vault-password-file <путь к файлу с паролем ansible-vault> 'значение переменной' --name 'название переменной'
+Запускать play-book с указанием пути к файлу с паролем. Пример команды: ansible-playbook aws.yml --vault-password-file <путь к файлу с паролем ansible-vault>
