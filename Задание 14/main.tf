@@ -37,12 +37,6 @@ resource "google_compute_instance" "terra-server" {
   #metadata_startup_script = "sudo su -; apt update; apt -y install nginx; rm -rf /var/www/html/*"
 
   provisioner "remote-exec" {
-    inline = [
-    "sudo su -",
-    "apt update",
-    "apt -y install nginx",
-    "rm -rf /var/www/html/*"
-    ]
     connection {
       type     = "ssh"
       user     = "root"
@@ -50,6 +44,13 @@ resource "google_compute_instance" "terra-server" {
       private_key = "${file("~/.ssh/id_rsa")}"
       timeout     = "2m"
     }
+
+    inline = [
+    "sudo su -",
+    "apt update",
+    "apt -y install nginx",
+    "rm -rf /var/www/html/*"]
+
   }
   provisioner "file" {
     source      = "./index.html"
