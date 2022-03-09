@@ -29,15 +29,17 @@ resource "google_compute_instance" "terra-server" {
     access_config {
       }
     }
-  provisioner "file" {
-    source      = "index.html"
-    destination = "/var/www/html/"
-  }
+
   metadata = {
     ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
   }
 
   metadata_startup_script = "sudo su -; apt update; apt -y install nginx; rm -rf /var/www/html/*"
+
+  provisioner "file" {
+    source      = "index.html"
+    destination = "/var/www/html/"
+  }
 }
 
 
