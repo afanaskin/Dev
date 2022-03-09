@@ -14,16 +14,27 @@ provider "google" {
   zone = "europe-north1-b"
 }
 
-resource "google_compute_instance" "my-terra-server" {
-  name = "terra-server-01"
+
+resource "google_compute_instance" "terra-server" {
+  name = "terra-server"
   machine_type = "e2-standard-4"
   boot_disk {
     initialize_params {
-      image = "Ubuntu 20.04 LTS"
+      size = "15"
+      image = "ubuntu-2004-focal-v20220303a"
     }
   }
 
     network_interface {
       network = "default"
+      access_config {
+      }
     }
+
+    metadata = {
+        ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
+      }
+
+    metadata_startup_script = "sudo su -; apt update; apt - install nginx; rm -rf /var/www/html/*; rsync index.html root@${var.ext_ip}:/var/www/html/"
+
 }
