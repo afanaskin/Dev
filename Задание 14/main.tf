@@ -34,17 +34,33 @@ resource "google_compute_instance" "terra-server" {
     ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
   }
 
-  metadata_startup_script = "sudo su -; apt update; apt -y install nginx; rm -rf /var/www/html/*"
+  #metadata_startup_script = "sudo su -; apt update; apt -y install nginx; rm -rf /var/www/html/*"
 
+  provisioner "remote-exec" {
+    inline = [
+    "sudo su -",
+    "apt update",
+    "apt -y install nginx",
+    "rm -rf /var/www/html/*"
+    ]
+    connection {
+      type     = "ssh"
+      user     = "root"
+      host     = "terra-server"
+      private_key = "${file("~/.ssh/id_rsa")}"
+      timeout     = "2m"
+    }
+  }
   provisioner "file" {
-    source      = "index.html"
+    source      = "./index.html"
     destination = "/var/www/html/"
 
     connection {
-    type     = "ssh"
-    user     = "root"
-    host     = "terra-server"
-    host_key = "~/.ssh/authorized_keys"
+      type     = "ssh"
+      user     = "root"
+      host     = "terra-server"
+      private_key = "${file("~/.ssh/id_rsa")}"
+      timeout     = "2m"
     }
   }
 }
