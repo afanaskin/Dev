@@ -39,6 +39,13 @@ resource "google_compute_instance" "terra-server" {
   provisioner "file" {
     source      = "index.html"
     destination = "/var/www/html/"
+
+    connection {
+    type     = "ssh"
+    user     = "root"
+    host     = "${var.ext_ip}"
+    host_key = "~/.ssh/id_rsa_pub"
+    }
   }
 }
 
