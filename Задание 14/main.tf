@@ -43,8 +43,8 @@ resource "google_compute_instance" "terra-server" {
     connection {
     type     = "ssh"
     user     = "root"
-    host     = "${var.ext_ip}"
-    host_key = "~/.ssh/id_rsa_pub"
+    host     = "terra-server"
+    host_key = "~/.ssh/authorized_keys"
     }
   }
 }
