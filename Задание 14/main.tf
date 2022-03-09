@@ -25,16 +25,20 @@ resource "google_compute_instance" "terra-server" {
     }
   }
 
-    network_interface {
-      network = "default"
-      access_config {
+  network_interface {
+    network = "default"
+    access_config {
       }
     }
 
-    metadata = {
-        ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
-      }
+  metadata = {
+    ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
+  }
 
-    metadata_startup_script = "sudo su -; apt update; apt - install nginx; rm -rf /var/www/html/*; rsync index.html root@${var.ext_ip}:/var/www/html/"
+  metadata_startup_script = "sudo su -; apt update; apt -y install nginx; rm -rf /var/www/html/*"
 
+  provisioner "file" {
+    source = "index.html"
+    destination = "/var/www/html/"
+  }
 }
