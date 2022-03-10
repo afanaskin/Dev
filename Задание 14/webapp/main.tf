@@ -61,3 +61,8 @@ resource "google_compute_instance" "run-server" {
 
 }
 
+resource "google_storage_bucket_object" "war" {
+  name   = "WebApp.war"
+  source = "/home/git/garden-tiger-moth.jpg"
+  bucket = "aiv-bucket-01"
+}
