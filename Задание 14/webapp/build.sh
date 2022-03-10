@@ -6,3 +6,4 @@ apt install -y maven
 mkdir /home/git
 git clone https://github.com/deepshankaryadav/CyberFRAT-DevSecOps-Training-Sample-Java-App.git /home/git
 cd /home/git && mvn package
+gsutil cp /home/git/target/WebApp.war gs://aiv-bucket-01/
