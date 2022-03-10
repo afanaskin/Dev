@@ -34,7 +34,7 @@ resource "google_compute_instance" "terra-server" {
     ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
   }
 
-  metadata_startup_script = "apt update, apt install -y default-jdk, apt install -y git, apt install -y maven, mkdir /home/git, git clone https://github.com/deepshankaryadav/CyberFRAT-DevSecOps-Training-Sample-Java-App.git /home/git, cd /home/git, cd /home/git && mvn package"
+  metadata_startup_script = "apt update; apt install -y default-jdk; apt install -y git; apt install -y maven; mkdir /home/git; git clone https://github.com/deepshankaryadav/CyberFRAT-DevSecOps-Training-Sample-Java-App.git /home/git; cd /home/git; cd /home/git && mvn package"
 
 }
 
