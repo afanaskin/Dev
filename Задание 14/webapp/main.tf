@@ -15,8 +15,8 @@ provider "google" {
 }
 
 
-resource "google_compute_instance" "terra-server" {
-  name = "terra-server"
+resource "google_compute_instance" "build-server" {
+  name = "build-server"
   machine_type = "e2-standard-4"
   boot_disk {
     initialize_params {
@@ -38,4 +38,26 @@ resource "google_compute_instance" "terra-server" {
 
 }
 
+resource "google_compute_instance" "run-server" {
+  name = "run-server"
+  machine_type = "e2-standard-4"
+  boot_disk {
+    initialize_params {
+      size  = "15"
+      image = "ubuntu-2004-focal-v20220303a"
+    }
+  }
+  network_interface {
+    network = "default"
+    access_config {
+    }
+  }
+
+  metadata = {
+    ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
+  }
+
+  metadata_startup_script = "${file("/home/afanaskin/terraform/run.sh")}"
+
+}
 
