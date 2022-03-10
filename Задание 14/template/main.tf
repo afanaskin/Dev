@@ -22,22 +22,13 @@ resource "google_compute_instance" "name" {
   machine_type = "custom-2-4096"
   boot_disk {
     initialize_params {
-      #Size in Gbs
-      size  = "15"
+      size  = "15" #Size in Gbs
       image = "ubuntu-2004-focal-v20220303a"
     }
   }
   network_interface {
     network = "default"
     access_config {
-      }
     }
-}
-  /*metadata = {
-    ssh-keys = "root:${file("/home/afanaskin/terraform/id_rsa.pub")}"
   }
-
-  metadata_startup_script = "${file("/home/afanaskin/terraform/build.sh")}"
-
-*/
-
+}
